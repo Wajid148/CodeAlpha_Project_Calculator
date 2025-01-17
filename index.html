@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced Calculator">
+    <title>Advanced Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .calculator {
+            background: #333;
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .display {
+            background-color: #222;
+            color: #fff;
+            font-size: 2.5rem;
+            padding: 20px;
+            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: right;
+            border: none;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .button {
+            background-color: #444;
+            color: #fff;
+            font-size: 1.5rem;
+            padding: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #555;
+        }
+
+        .button:active {
+            background-color: #666;
+        }
+
+        .button.operation {
+            background-color: #ff758c;
+        }
+
+        .button.operation:hover {
+            background-color: #ff7eb3;
+        }
+
+        .button.clear {
+            background-color: #ff5c5c;
+        }
+
+        .button.clear:hover {
+            background-color: #ff7a7a;
+        }
+
+        .button.equal {
+            background-color: #4caf50;
+        }
+
+        .button.equal:hover {
+            background-color: #5cb85c;
+        }
+
+        .button.special {
+            background-color: #3f51b5;
+        }
+
+        .button.special:hover {
+            background-color: #3d4c8f;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" class="display" disabled>
+        <div class="buttons">
+            <button class="button clear" onclick="clearDisplay()">C</button>
+            <button class="button operation" onclick="appendToDisplay('/')">/</button>
+            <button class="button operation" onclick="appendToDisplay('*')">*</button>
+            <button class="button operation" onclick="appendToDisplay('-')">-</button>
+
+            <button class="button" onclick="appendToDisplay('7')">7</button>
+            <button class="button" onclick="appendToDisplay('8')">8</button>
+            <button class="button" onclick="appendToDisplay('9')">9</button>
+            <button class="button operation" onclick="appendToDisplay('+')">+</button>
+
+            <button class="button" onclick="appendToDisplay('4')">4</button>
+            <button class="button" onclick="appendToDisplay('5')">5</button>
+            <button class="button" onclick="appendToDisplay('6')">6</button>
+            <button class="button equal" onclick="calculateResult()">=</button>
+
+            <button class="button" onclick="appendToDisplay('1')">1</button>
+            <button class="button" onclick="appendToDisplay('2')">2</button>
+            <button class="button" onclick="appendToDisplay('3')">3</button>
+            <button class="button" onclick="appendToDisplay('0')">0</button>
+
+            <button class="button special" onclick="appendToDisplay('.')">.</button>
+            <button class="button special" onclick="calculateSquareRoot()">√</button>
+            <button class="button special" onclick="calculatePercentage()">%</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+
+        function appendToDisplay(value) {
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function calculateResult() {
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+
+        function calculateSquareRoot() {
+            try {
+                display.value = Math.sqrt(eval(display.value));
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+
+        function calculatePercentage() {
+            try {
+                display.value = eval(display.value) / 100;
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
+
